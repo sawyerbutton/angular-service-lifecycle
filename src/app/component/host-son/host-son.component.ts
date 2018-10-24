@@ -10,12 +10,12 @@ import {LocalService} from '../../services/local.service';
 export class HostSonComponent implements OnInit {
   id$: any;
   constructor(
-    // @Host() private injectTestService: InjectTestService
-    @Host() @Optional() private localService: LocalService
+    @Host() private injectTestService: InjectTestService
+    // @Host() @Optional() private localService: LocalService
   ) { }
 
   ngOnInit() {
-    // this.id$ = this.injectTestService.getServiceId();
-    this.id$ = this.localService.getLocalServiceID();
+    this.id$ = this.injectTestService.getServiceId();
+    // this.id$ = this.localService.getLocalServiceID();
   }
 }
