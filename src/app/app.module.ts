@@ -12,6 +12,8 @@ import { SonComponent } from './component/son/son.component';
 import { SelfSonComponent } from './component/self-son/self-son.component';
 import { SkipSelfSonComponent } from './component/skip-self-son/skip-self-son.component';
 import { SkipSelfOptionalSonComponent } from './component/skip-self-optional-son/skip-self-optional-son.component';
+import { HostFatherComponent } from './component/host-father/host-father.component';
+import { HostSonComponent } from './component/host-son/host-son.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { SkipSelfOptionalSonComponent } from './component/skip-self-optional-son
     SonComponent,
     SelfSonComponent,
     SkipSelfSonComponent,
-    SkipSelfOptionalSonComponent
+    SkipSelfOptionalSonComponent,
+    HostFatherComponent,
+    HostSonComponent
   ],
   imports: [
     BrowserModule,
