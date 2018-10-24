@@ -157,3 +157,84 @@ export const MY_CONFIG_TOKEN = new InjectionToken<string>('my_config.ts');
 > 只是事实上上述方式也可以通过直接将配置文件直接通过`import`引入服务中实现
 
 > 使用上述方式更多的是一种屠龙之术，只是龙在Angular中是存在的
+
+
+### @Self标签
+
+> 对于子组件而言，其可以使用在父组件的层面上定义的服务
+
+![non self tag](./src/assets/angury1.png)
+
+> 由于`SonComponent`嵌套在`FatherComponent`内部，而且其自身没有配置 `providers`
+> 所以其共享了父层的`inject-test-service`实例
+
+
+- 利用`@Self` 装饰器来提示注射器不要向上查找只在组件自身内部查找依赖
+
+> 需要注意的是，使用`@Self`标签后需要注意本组件中是否包含所需依赖`providers`
+
+> 若注射器没有找到相应的依赖则会抛出错误
+
+```typescript
+import {Component, OnInit, Self} from '@angular/core';
+import {InjectTestService} from '../../services/inject-test.service';
+
+@Component({
+  selector: 'app-self-son',
+  templateUrl: './self-son.component.html',
+  styleUrls: ['./self-son.component.css'],
+  providers: [InjectTestService]
+})
+export class SelfSonComponent implements OnInit {
+  id$: any;
+  constructor(
+    @Self() private injectTestService: InjectTestService
+  ) { }
+
+  ngOnInit() {
+    this.id$ = this.injectTestService.getServiceId();
+  }
+}
+```
+
+![self tag](./src/assets/angury2.png)
+
+### @SkipSelf和@Optional
+
+> 见名知意系列之 `@SkipSelf`
+
+> 采用`@SkipSelf`标签将会使注射器跳过组件自身，沿着`injector tree`向上寻找依赖
+
+```typescript
+import {Component, OnInit, SkipSelf} from '@angular/core';
+import {InjectTestService} from '../../services/inject-test.service';
+
+@Component({
+  selector: 'app-skip-self-son',
+  templateUrl: './skip-self-son.component.html',
+  styleUrls: ['./skip-self-son.component.css'],
+  providers: [InjectTestService]
+})
+export class SkipSelfSonComponent implements OnInit {
+  id$: any;
+  constructor(
+    @SkipSelf() private injectTestService: InjectTestService
+  ) { }
+
+  ngOnInit() {
+    this.id$ = this.injectTestService.getServiceId();
+  }
+}
+```
+
+![skip self tag](./src/assets/angury3.png)
+
+>可以组合使用` @SkipSelf `与 `@Optional`
+
+```typescript
+@SkipSelf() @Optional() public injectTestService: InjectTestService
+```
+
+> 使用` @Optional `装饰器后如果在父层上找到了指定的依赖类型则会据此创建实例，否则，直接设置依赖为null并不抛异常(_存疑_)
+
+![skip self optional tag](./src/assets/angury4.png)

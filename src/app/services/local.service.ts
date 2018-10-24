@@ -1,4 +1,6 @@
 import {AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, Injectable, OnDestroy, OnInit} from '@angular/core';
+import { UUID} from 'angular2-uuid';
+import {of} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -24,5 +26,8 @@ export class LocalService implements OnDestroy, OnInit, AfterViewInit, AfterView
   }
   ngAfterContentInit() {
     console.log('localService is AfterContentInit');
+  }
+  getLocalServiceID() {
+    return of(UUID.UUID());
   }
 }
