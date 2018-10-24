@@ -49,4 +49,3 @@
   providers: [LocalService]
 })
 ```
-# angular-service-lifecycle
