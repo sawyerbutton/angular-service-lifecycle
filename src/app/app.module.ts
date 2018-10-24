@@ -4,11 +4,13 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { GlobalService} from './services/global.service';
 import { HelloComponent } from './component/hello/hello.component';
+import { TestDirective } from './directives/test.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HelloComponent
+    HelloComponent,
+    TestDirective
   ],
   imports: [
     BrowserModule
