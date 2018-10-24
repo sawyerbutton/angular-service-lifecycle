@@ -5,6 +5,8 @@ import { AppComponent } from './app.component';
 import { GlobalService} from './services/global.service';
 import { HelloComponent } from './component/hello/hello.component';
 import { TestDirective } from './directives/test.directive';
+import {LiteralService} from './services/literal.service';
+import {MY_CONFIG, MY_CONFIG_TOKEN} from './my.config';
 
 @NgModule({
   declarations: [
@@ -16,6 +18,6 @@ import { TestDirective } from './directives/test.directive';
     BrowserModule
   ],
   bootstrap: [AppComponent],
-  providers: [GlobalService]
+  providers: [GlobalService, LiteralService, {provide: MY_CONFIG_TOKEN, useValue: MY_CONFIG}]
 })
 export class AppModule { }

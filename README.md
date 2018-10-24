@@ -83,3 +83,77 @@
 
 - `injector`的生命周期与组件自身保持一致，当组件被销毁的时候，对应的`injector`也会被销毁
 
+### @Inject 和 @Injectable
+
+> 与常见的通过`@Injectable`为服务生成元数据之外，也可以通过`@Inject`作为手动挡的方式手动指定元数据类型信息
+
+```typescript
+import {Inject, Injectable} from '@angular/core';
+import { UUID } from 'angular2-uuid';
+import {HttpClient} from '@angular/common/http';
+
+export class InjectTestService {
+  private _id: string;
+  constructor(
+    @Inject(HttpClient) private http
+  ) {
+    this._id = UUID.UUID();
+  }
+}
+```
+
+> 值得注意的是，用` @Inject` 和用 `@Injectable` 最终编译出来的代码是不一样的
+
+> 用 `@Inject` 生成的代码会多于`@Injectable`导致最后生成的文件变大
+
+#### @Inject的另类用法
+
+> `@Inject`不仅可以注入强类型的对象也可以注入弱类型的对象字面值
+
+```typescript
+import { Injectable, Inject } from '@angular/core';
+import {MY_CONFIG_TOKEN} from '../my.config';
+
+// @Injectable({
+//   providedIn: 'root'
+// })
+export class LiteralService {
+
+  constructor(
+    @Inject(MY_CONFIG_TOKEN) config: object
+  ) {
+    console.log(config);
+  }
+}
+```
+
+> 前提是
+
+```typescript
+import { InjectionToken} from '@angular/core';
+
+export const MY_CONFIG = {
+  name: '@Inject标签测试'
+};
+
+export const MY_CONFIG_TOKEN = new InjectionToken<string>('my_config.ts');
+```
+
+```typescript
+@NgModule({
+  declarations: [
+    AppComponent,
+    HelloComponent,
+    TestDirective
+  ],
+  imports: [
+    BrowserModule
+  ],
+  bootstrap: [AppComponent],
+  providers: [GlobalService, LiteralService, {provide: MY_CONFIG_TOKEN, useValue: MY_CONFIG}]
+})
+```
+
+> 只是事实上上述方式也可以通过直接将配置文件直接通过`import`引入服务中实现
+
+> 使用上述方式更多的是一种屠龙之术，只是龙在Angular中是存在的
