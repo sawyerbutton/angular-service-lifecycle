@@ -1,8 +1,8 @@
 import {Injectable, OnDestroy} from '@angular/core';
 
-@Injectable({
-  providedIn: 'root'
-})
+// @Injectable({
+//   providedIn: 'root'
+// })
 export class GlobalService implements OnDestroy{
   constructor() {
     console.log('GlobalService is construct');

@@ -14,6 +14,9 @@ import { SkipSelfSonComponent } from './component/skip-self-son/skip-self-son.co
 import { SkipSelfOptionalSonComponent } from './component/skip-self-optional-son/skip-self-optional-son.component';
 import { HostFatherComponent } from './component/host-father/host-father.component';
 import { HostSonComponent } from './component/host-son/host-son.component';
+import { ManualInjectorSonComponent } from './component/manual-injector-son/manual-injector-son.component';
+import { ViewProviderFatherComponent } from './component/view-provider-father/view-provider-father.component';
+import { ViewProviderSonComponent } from './component/view-provider-son/view-provider-son.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,10 @@ import { HostSonComponent } from './component/host-son/host-son.component';
     SkipSelfSonComponent,
     SkipSelfOptionalSonComponent,
     HostFatherComponent,
-    HostSonComponent
+    HostSonComponent,
+    ManualInjectorSonComponent,
+    ViewProviderFatherComponent,
+    ViewProviderSonComponent
   ],
   imports: [
     BrowserModule,

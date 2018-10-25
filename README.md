@@ -250,3 +250,20 @@ export class SkipSelfSonComponent implements OnInit {
 - 换言之`@Host` 装饰器是`被投影的组件`和`其宿主`之间构建联系的纽带
 
 > 如果宿主上面并没有所需要的依赖时可以使用`@Optional` 装饰器避免程序崩溃(抛出异常不可避)
+
+### Use Injector Manually(待定)
+
+### Providers 和 viewProviders
+
+> 当在component中使用`viewProviders`提供providers时,注入在父组件的服务奖不会注入到通过投影引入的内容
+
+> 如果希望像上述的方式在将注入在父组件的服务同样提供给投影内容，需要使用`Providers`实现
+
+> `viewProviders`的实际作用可以理解为限制`providers`注入只面向子组件而不面向投影组件
+
+> `viewProviders`防止投影内容扰乱服务，其家住在构建angular library时将会得到体现
+
+
+
+
+

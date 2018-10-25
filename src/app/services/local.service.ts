@@ -2,9 +2,9 @@ import {AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, 
 import { UUID} from 'angular2-uuid';
 import {of} from 'rxjs';
 
-@Injectable({
-  providedIn: 'root'
-})
+// @Injectable({
+//   providedIn: 'root'
+// })
 export class LocalService implements OnDestroy, OnInit, AfterViewInit, AfterViewChecked, AfterContentChecked, AfterContentInit {
   constructor() {
     console.log('localService is construct');
