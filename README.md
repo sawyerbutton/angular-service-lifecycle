@@ -263,6 +263,31 @@ export class SkipSelfSonComponent implements OnInit {
 
 > `viewProviders`防止投影内容扰乱服务，其家住在构建angular library时将会得到体现
 
+```typescript
+import { Component, OnInit } from '@angular/core';
+import {InjectTestService} from '../../services/inject-test.service';
+
+@Component({
+  selector: 'app-view-provider-father',
+  templateUrl: './view-provider-father.component.html',
+  styleUrls: ['./view-provider-father.component.css'],
+  // viewProviders: [InjectTestService]
+  providers: [InjectTestService]
+})
+export class ViewProviderFatherComponent implements OnInit {
+  id$: any;
+  constructor(
+    private injectTestService: InjectTestService
+  ) { }
+  ngOnInit() {
+    this.id$ = this.injectTestService.getServiceId();
+  }
+}
+```
+
+> 当是用`viewProviders`属性作为元数据时,投影内容无法获取父组件中的注入的服务，所以会报出`NullInjectorError: NoProvider for InjectTestService!
+
+![view provider bug](./src/assets/bug1.png)
 
 
 
